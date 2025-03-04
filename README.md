@@ -1,93 +1,226 @@
-**Week 2: Express.js Fundamentals Assignment**
+Overview
+This project is a simple Express.js application that demonstrates the fundamentals of creating RESTful APIs, using middleware, and handling errors. It includes routes for managing users and products, along with a custom logger middleware.
 
-**Objective:**
+Features
+RESTful API:
 
-- Apply Express.js concepts learned throughout the week.
-- Develop hands-on experience with creating routes, middleware, and API endpoints.
-- Understand and implement RESTful APIs.
+CRUD operations for users and products.
 
-**Instructions:**
+Middleware:
 
-1. **Setup Express.js Project:**
+Custom logger to log request details (method, URL, timestamp).
 
-   - Install Node.js using NVM.
-   - Create a new project folder named `express-assignment`.
-   - Initialize a Node.js project using:
-     ```sh
-     npm init -y
-     ```
-   - Install necessary dependencies:
-     ```sh
-     npm install express dotenv
-     ```
+Error Handling:
 
-2. **Project Structure:**
+Global error handler to catch and respond to errors gracefully.
 
-   - Organize your project files with a clear folder structure:
-     ```
-     express-assignment/
-     │-- routes/
-     │    ├── userRoutes.js
-     │    ├── productRoutes.js
-     │-- middleware/
-     │    ├── logger.js
-     │-- controllers/
-     │    ├── userController.js
-     │    ├── productController.js
-     │-- index.js
-     │-- package.json
-     │-- README.md
-     │-- .env
-     ```
+Environment Variables:
 
-3. **Create Routes:**
+Use of .env to manage configuration (e.g., PORT).
 
-   - Create `userRoutes.js` and `productRoutes.js` inside the `routes/` folder.
-   - Implement RESTful routes for users and products (GET, POST, PUT, DELETE).
-   - Ensure proper usage of route parameters and query strings.
+Prerequisites
+Before running the project, ensure you have the following installed:
 
-4. **Implement Middleware:**
+Node.js (v14 or higher)
 
-   - Create a custom middleware function in `middleware/logger.js` to log request details (method, URL, timestamp).
-   - Apply middleware globally to all routes.
+npm (comes with Node.js)
 
-5. **Develop Controllers:**
+Setup
+Clone the repository:
 
-   - Create controller functions in `controllers/userController.js` and `controllers/productController.js`.
-   - Implement business logic to handle requests and responses.
+bash
+Copy
+git clone https://github.com/your-username/express-assignment.git
+cd express-assignment
+Install dependencies:
 
-6. **Environment Variables:**
+bash
+Copy
+npm install
+Create a .env file:
+Create a .env file in the root directory and add the following:
 
-   - Use `dotenv` to manage environment variables.
-   - Define variables such as `PORT` in the `.env` file and access them inside the application.
+plaintext
+Copy
+PORT=3000
+Start the server:
 
-7. **Error Handling:**
+bash
+Copy
+node index.js
+The server will start running at http://localhost:3000.
 
-   - Implement a global error-handling middleware to catch and respond to errors gracefully.
+Project Structure
+Copy
+express-assignment/
+│-- routes/
+│ ├── userRoutes.js
+│ ├── productRoutes.js
+│-- middleware/
+│ ├── logger.js
+│-- controllers/
+│ ├── userController.js
+│ ├── productController.js
+│-- index.js
+│-- package.json
+│-- README.md
+│-- .env
+API Endpoints
+Users
+Get all users:
 
-8. **Testing:**
+Method: GET
 
-   - Run the server using:
-     ```sh
-     node index.js
-     ```
-   - Test API endpoints using Postman or cURL.
-   - Verify routes, middleware functionality, and error handling.
+URL: /api/users
 
-9. **Documentation:**
+Example:
 
-   - Add a `README.md` with instructions on setting up and running the project.
-   - Document available API endpoints with descriptions and example requests.
+bash
+Copy
+curl http://localhost:3000/api/users
+Get a user by ID:
 
-10. **Submission:**
+Method: GET
 
-   - Push your code to your GitHub repository.
+URL: /api/users/:id
 
-**Evaluation Criteria:**
+Example:
 
-- Correct implementation of Express routes and middleware.
-- Proper error handling and logging.
-- Clean project structure and code organization.
-- Detailed documentation with clear instructions.
-- Successful testing of all endpoints.
+bash
+Copy
+curl http://localhost:3000/api/users/1
+Create a user:
 
+Method: POST
+
+URL: /api/users
+
+Body: JSON object with user details.
+
+Example:
+
+bash
+Copy
+curl -X POST http://localhost:3000/api/users -H "Content-Type: application/json" -d '{"name": "John Doe"}'
+Update a user:
+
+Method: PUT
+
+URL: /api/users/:id
+
+Body: JSON object with updated user details.
+
+Example:
+
+bash
+Copy
+curl -X PUT http://localhost:3000/api/users/1 -H "Content-Type: application/json" -d '{"name": "Jane Doe"}'
+Delete a user:
+
+Method: DELETE
+
+URL: /api/users/:id
+
+Example:
+
+bash
+Copy
+curl -X DELETE http://localhost:3000/api/users/1
+Products
+Get all products:
+
+Method: GET
+
+URL: /api/products
+
+Example:
+
+bash
+Copy
+curl http://localhost:3000/api/products
+Get a product by ID:
+
+Method: GET
+
+URL: /api/products/:id
+
+Example:
+
+bash
+Copy
+curl http://localhost:3000/api/products/1
+Create a product:
+
+Method: POST
+
+URL: /api/products
+
+Body: JSON object with product details.
+
+Example:
+
+bash
+Copy
+curl -X POST http://localhost:3000/api/products -H "Content-Type: application/json" -d '{"name": "Laptop", "price": 999}'
+Update a product:
+
+Method: PUT
+
+URL: /api/products/:id
+
+Body: JSON object with updated product details.
+
+Example:
+
+bash
+Copy
+curl -X PUT http://localhost:3000/api/products/1 -H "Content-Type: application/json" -d '{"name": "Gaming Laptop", "price": 1299}'
+Delete a product:
+
+Method: DELETE
+
+URL: /api/products/:id
+
+Example:
+
+bash
+Copy
+curl -X DELETE http://localhost:3000/api/products/1
+Middleware
+Logger:
+
+Logs request details (method, URL, timestamp) to the console.
+
+Applied globally to all routes.
+
+Error Handling
+Global Error Handler:
+
+Catches and logs errors.
+
+Responds with a 500 Internal Server Error and a JSON message:
+
+json
+Copy
+{
+"message": "Something went wrong!"
+}
+Testing
+Start the server:
+
+bash
+Copy
+node index.js
+Test API endpoints:
+
+Use Postman or curl to test the endpoints.
+
+Example:
+
+bash
+Copy
+curl http://localhost:3000/api/users
+Documentation
+API Documentation:
+
+All available endpoints are documented in the API Endpoints section above.
